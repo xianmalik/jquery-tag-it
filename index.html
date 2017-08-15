@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+
+    <label for="group-create-tags"><strong>Search tags</strong> <a href="" onClick="OpenInAppBrowser('tagdescription')">what's this?</a></label><span class="form-error" id="group-create-tags-err"></span>
+    <ul id="group-create-tags"></ul>
+    <style media="screen">
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    ul.tagit li.tagit-choice-editable {
+        font-size: 16px;
+        font-weight: 100;
+        border-radius: 1em;
+        background: transparent;
+        border-color: #ff931e;
+        color: #333;
+        padding: .2em 25px .2em .5em;
+    }
+    span.ui-icon.ui-icon-close::before,
+    span.ui-icon.ui-icon-close::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 25%;
+        background-color: #ff931e;
+        display: block;
+        width: 1px;
+        height: 100%;
+    }
+    span.ui-icon.ui-icon-close::before {
+        transform: rotate(45deg);
+    }
+    span.ui-icon.ui-icon-close::after {
+        transform: rotate(-45deg);
+    }
+    span.ui-icon.ui-icon-close {
+        background: transparent;
+    }
+    </style>
+    <style media="screen">
+      #group-create-tags, #schedule-create-tags { border:none !important;}
+      #group-create-tags li div input,#schedule-create-tags li div input{background-color:#fff !important;}
+    </style>
+
+    <script type="text/javascript">
+        $("#group-create-tags").tagit({
+          fieldName:"group-create-tags[]",
+          placeholderText:"Enter tags that best describe your group",
+          preprocessTag:function(val){
+            if(!val){return'';}
+            return val.toLowerCase();
+          }
+        });
+
+        $("#group-create-tags").tagit("removeAll");
+        $.each(group.tags,function(index,tag){
+          $("#group-create-tags").tagit("createTag",tag);
+        });
+    </script>
+  </body>
+</html>
